@@ -55,7 +55,7 @@ export default function CricketGroundsList({ navigation }) {
                 </View>
                 <TouchableOpacity
                     style={styles.exploreButton}
-                    onPress={() => navigation.navigate('Detail', { futsal: item })}
+                    onPress={() => navigation.navigate('Details', { futsal: item })}
                 >
                     <Text style={styles.exploreButtonText}>Explore</Text>
                 </TouchableOpacity>

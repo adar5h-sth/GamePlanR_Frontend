@@ -13,7 +13,7 @@ const data = [
     },
     {
         id: '2',
-        name: 'Deenam ko Court',
+        name: 'Shisui ko Court',
         image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZCBB7g1EleekPvotZcwvTRWA0qwTrgMYxOg&s',
         distance: '3.0 km away',
         price: 'NRP 500/hour',
@@ -55,7 +55,7 @@ export default function BadmintonCourtsList({ navigation }) {
                 </View>
                 <TouchableOpacity
                     style={styles.exploreButton}
-                    onPress={() => navigation.navigate('Detail', { futsal: item })}
+                    onPress={() => navigation.navigate('Details', { futsal: item })}
                 >
                     <Text style={styles.exploreButtonText}>Explore</Text>
                 </TouchableOpacity>

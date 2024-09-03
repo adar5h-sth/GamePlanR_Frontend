@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, TextInput, Alert, Button } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, TextInput, Alert } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import BookingModal from './BookingModal';
+import FindOpponentModal from './FindOpponentModal';
 
-export default function Detail({ route }) {
-    
+export default function Details({ route }) {
     const { futsal } = route.params;
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [opponentModalVisible, setOpponentModalVisible] = useState(false); // State for opponent modal
+    const [selectedSlotIndex, setSelectedSlotIndex] = useState(null);
+
 
     const onChange = (event, selectedDate) => {
         if (event.type === "set") { // Check if the user selected a date
@@ -23,6 +28,31 @@ export default function Detail({ route }) {
         setShow(true);
     };
 
+
+    const handleSlotSelection = (slot, index) => {
+        if (!slot.available) {
+            Alert.alert("Slot Already Booked", "Please choose another time.");
+            return;
+        }
+        setSelectedSlotIndex(index);
+    };
+
+    const handleBookNow = () => {
+        if (selectedSlotIndex !== null) {
+            setModalVisible(true);
+        } else {
+            Alert.alert("No Slot Selected", "Please select a time slot before booking.");
+        }
+    };
+
+    const handleFindOpponent = () => {
+        if (selectedSlotIndex !== null) {
+            setOpponentModalVisible(true);
+        } else {
+            Alert.alert("No Slot Selected", "Please select a time slot before finding an opponent.");
+        }
+    };
+
     // Example slot data
     const [slots, setSlots] = useState([
         { time: '08:00AM - 09:00AM', available: true },
@@ -32,20 +62,6 @@ export default function Detail({ route }) {
         { time: '12:00PM - 01:00PM', available: false },
         { time: '01:00PM - 02:00PM', available: true },
     ]);
-
-    // Track the selected slot index
-    const [selectedSlotIndex, setSelectedSlotIndex] = useState(null);
-
-    // Handle slot selection
-    const handleSlotSelection = (slot, index) => {
-        if (!slot.available) {
-            Alert.alert("Slot Already Booked", "Please choose another time.");
-            return;
-        }
-
-        // Update selected slot index
-        setSelectedSlotIndex(index);
-    };
 
     return (
         <ScrollView>
@@ -63,7 +79,7 @@ export default function Detail({ route }) {
                     <View style={styles.infoContainer}>
                         <View style={styles.row}>
                             <Ionicons name="location-outline" size={20} color="red" />
-                            <Text style={styles.infoText}>{futsal.location}</Text>
+                            <Text style={styles.infoText}>{futsal.location}Map API</Text>
                         </View>
                         <View style={styles.row}>
                             <Ionicons name="cash-outline" size={20} color="green" />
@@ -82,11 +98,11 @@ export default function Detail({ route }) {
                         <Text style={styles.sectionTitle}>Contact:</Text>
                         <View style={styles.row}>
                             <Ionicons name="call-outline" size={20} color="black" />
-                            <Text style={styles.infoText}>{futsal.contact}</Text>
+                            <Text style={styles.infoText}>{futsal.contact}Database bata aucha</Text>
                         </View>
                         <View style={styles.row}>
                             <Ionicons name="person-outline" size={20} color="black" />
-                            <Text style={styles.infoText}>{futsal.contactPerson}</Text>
+                            <Text style={styles.infoText}>{futsal.contactPerson}Database bata aucha</Text>
                         </View>
                     </View>
 
@@ -95,11 +111,11 @@ export default function Detail({ route }) {
                         <Text style={styles.sectionTitle}>Availability:</Text>
                         <View style={styles.row}>
                             <Ionicons name="calendar-outline" size={20} color="black" />
-                            <Text style={styles.infoText}>{futsal.availability}</Text>
+                            <Text style={styles.infoText}>{futsal.availability}Database bata aucha</Text>
                         </View>
                         <View style={styles.row}>
                             <Ionicons name="time-outline" size={20} color="black" />
-                            <Text style={styles.infoText}>{futsal.hours}</Text>
+                            <Text style={styles.infoText}>{futsal.hours}Database bata aucha</Text>
                         </View>
                     </View>
 
@@ -157,6 +173,7 @@ export default function Detail({ route }) {
                                 mode="date"
                                 display="default"
                                 onChange={onChange}
+                                minimumDate={new Date()} // Prevent past dates from being selected
                             />
                         )}
                     </View>
@@ -178,17 +195,38 @@ export default function Detail({ route }) {
                                 </TouchableOpacity>
                             ))}
                         </View>
-
-                        {/* Add Buttons Here */}
-                        <View style={styles.buttonsContainer}>
-                            <TouchableOpacity style={styles.bookNowButton}>
-                                <Text style={styles.buttonText}>Book Now</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.findOpponentButton}>
-                                <Text style={styles.buttonText}>Find Opponent</Text>
-                            </TouchableOpacity>
-                        </View>
                     </View>
+
+                    {/* Adding Buttons Here */}
+                    <View style={styles.buttonsContainer}>
+                        <TouchableOpacity style={styles.bookNowButton} onPress={handleBookNow}>
+                            <Text style={styles.buttonText}>Book Now</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.findOpponentButton} onPress={handleFindOpponent}>
+                            <Text style={styles.buttonText}>Find Opponent</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    {/* Booking Modal */}
+                    <BookingModal
+                        visible={modalVisible}
+                        onClose={() => setModalVisible(false)}
+                        futsalName={futsal.name}
+                        location={futsal.location}
+                        date={date.toLocaleDateString()}
+                        time={selectedSlotIndex !== null ? slots[selectedSlotIndex].time : ''}
+                        cost={futsal.price}  // Pass the dynamic cost
+                    />
+                    {/* Find Opponent Modal */}
+                    <FindOpponentModal
+                        visible={opponentModalVisible}
+                        onClose={() => setOpponentModalVisible(false)}
+                        futsalName={futsal.name}
+                        location={futsal.location}
+                        date={date.toLocaleDateString()}
+                        time={selectedSlotIndex !== null ? slots[selectedSlotIndex].time : ''}
+                        cost={futsal.price}
+                    />
                 </View>
             </View>
         </ScrollView >

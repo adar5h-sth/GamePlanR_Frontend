@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import BottomTabNavigator from './src/Navigation/BottomTabNavigator'; // Adjust the path based on your structure
+import BottomTabNavigator from './src/Navigation/BottomTabNavigator';
 
 
 export default function App() {

@@ -44,6 +44,18 @@ export default function MainScreen() {
                 break;
         }
     };
+    const handleArenaCardPress = () => {
+        const futsalDetails = {
+            name: "Adarsh ko Futsal",
+            location: "", //Map API
+            distance: "2.1 km",
+            price: "NRP 600",
+            rating: "5.0",
+            image: "https://5.imimg.com/data5/SELLER/Default/2021/5/EY/RW/SB/3103550/futsal-court-construction-500x500.jpg",
+        };
+
+        navigation.navigate('Details', { futsal: futsalDetails });
+    };
 
     return (
         <ScrollView style={styles.container}>
@@ -65,7 +77,7 @@ export default function MainScreen() {
                 price="600"
                 rating="5.0"
                 image="https://5.imimg.com/data5/SELLER/Default/2021/5/EY/RW/SB/3103550/futsal-court-construction-500x500.jpg"
-                onPress={() => alert('Adarsh ko Futsal Clicked!')}
+                onPress={handleArenaCardPress}
             />
 
             <Text style={styles.sportCategoryTitle}>Sport Categories</Text>
