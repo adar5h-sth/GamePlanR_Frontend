@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
-
+import { useNavigation } from '@react-navigation/native';
+import LoadingOverlay from '../OverlayScreen/LoadingOverlay';
 
 const AccountScreen = () => {
     const [profileData, setProfileData] = useState({
@@ -9,13 +10,18 @@ const AccountScreen = () => {
         gender: '',
         profilePicture: '',
     });
+    const [isLoading, setIsLoading] = useState(false);
+
+    const navigation = useNavigation();
 
     useEffect(() => {
-        // Fetch data from backend here and update state
         const fetchProfileData = async () => {
-            // Replace this with your actual API call
-            const userData = await fetchUserProfileData();
-            setProfileData(userData);
+            try {
+                const userData = await fetchUserProfileData();
+                setProfileData(userData);
+            } catch (error) {
+                Alert.alert("Error", "Failed to load profile data.");
+            }
         };
 
         fetchProfileData();
@@ -25,6 +31,16 @@ const AccountScreen = () => {
         Alert.alert(`${feature} Under Development`, 'This feature is currently under development by Raj Maharjan.');
     };
 
+    const handleLogout = async () => {
+        setIsLoading(true);
+        setTimeout(() => {
+            setIsLoading(false);
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'AccountTypeSelection' }],
+            });
+        }, 1500); // Simulate a delay for logout process
+    };
 
     return (
         <View style={styles.container}>
@@ -59,20 +75,21 @@ const AccountScreen = () => {
                 </TouchableOpacity>
             </View>
 
-            <TouchableOpacity style={styles.logoutButton}>
+            <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
                 <Text style={styles.logoutText}>Log Out</Text>
             </TouchableOpacity>
+
+            <LoadingOverlay visible={isLoading} onClose={() => setIsLoading(false)} />
         </View>
     );
 };
 
 const fetchUserProfileData = async () => {
-    // This is a mock function; replace it with your actual API call
     return {
-        name: 'Jeethalal Gada',
-        age: 45,
+        name: 'Itachi Uchiha',
+        age: 22,
         gender: 'Male',
-        profilePicture: 'https://pbs.twimg.com/profile_images/1286660994782179328/Ehh8f9ml_400x400.jpg',
+        profilePicture: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTba93PTz7w17wgTQZiFi9facHu8KQIWbUmww&s',
     };
 };
 
@@ -91,8 +108,11 @@ const styles = StyleSheet.create({
     avatar: {
         width: 120,
         height: 120,
-        borderRadius: 60,
+        borderRadius: 60, // Keep this for circular avatar
         backgroundColor: '#E0E0E0',
+        borderWidth: 3, // Adds a border to the image
+        borderColor: '#black',
+        marginBottom: 10, // Add some space below the avatar
     },
     username: {
         marginTop: 8,
@@ -100,7 +120,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     details: {
-        marginTop: 4, // Space between username and details
+        marginTop: 4,
         fontSize: 14,
         color: '#666',
     },

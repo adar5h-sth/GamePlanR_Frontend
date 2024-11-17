@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Entypo';
 
 const data = [
     {
         id: '1',
-        name: 'Adarsh Ko Court',
+        name: 'Downtown Basketball Court',
         image: 'https://static.vecteezy.com/system/resources/thumbnails/022/935/088/small/basketball-hoop-in-the-gym-generative-ai-photo.jpg',
         distance: '2.0 km away',
         price: 'NRP 600/hour',
@@ -13,7 +14,7 @@ const data = [
     },
     {
         id: '2',
-        name: 'Sthapits Clan',
+        name: 'Golfutar Basketball Court',
         image: 'https://www.harrodsport.com/uploads/default/basketball-court-dimensions-and-markings-hero-720x480.jpg',
         distance: '3.0 km away',
         price: 'NRP 500/hour',
@@ -39,7 +40,7 @@ export default function BasketballCourtsList({ navigation }) {
             <View style={styles.infoContainer}>
                 <Text style={styles.name}>{item.name}</Text>
                 <View style={styles.detailsRow}>
-                    <Ionicons name="location-outline" size={16} color="#666" />
+                    <Icon name="direction" size={14} color="black" />
                     <Text style={styles.details}>{item.distance}</Text>
                 </View>
                 <Text style={styles.details}>{item.price}</Text>
@@ -93,8 +94,8 @@ const styles = StyleSheet.create({
         shadowRadius: 3,
     },
     image: {
-        width: 125,
-        height: 140,
+        width: 135,
+        height: 160,
         borderRadius: 8,
     },
     infoContainer: {

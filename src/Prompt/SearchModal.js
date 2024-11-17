@@ -40,7 +40,14 @@ export default function SearchModal({ visible, onClose, onContinue }) {
                             <Ionicons name="my-location" size={23} color="black" />
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity style={styles.continueButton} onPress={onContinue}>
+                    <TouchableOpacity
+                        style={[
+                            styles.continueButton,
+                            location ? {} : styles.disabledButton
+                        ]}
+                        onPress={onContinue}
+                        disabled={!location} // Disable if location is empty
+                    >
                         <Text style={styles.continueButtonText}>Continue</Text>
                     </TouchableOpacity>
                 </View>
@@ -98,5 +105,8 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
         fontSize: 16,
+    },
+    disabledButton: {
+        backgroundColor: 'gray',
     },
 });

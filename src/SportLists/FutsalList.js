@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Entypo';
 
 const data = [
     {
         id: '1',
-        name: 'Adarsh Ko Futsal',
+        name: 'Kumari Futsal',
         image: 'https://img.freepik.com/premium-photo/detailed-image-futsal-ball-indoor-court_1235831-68896.jpg',
         distance: '2.0 km away',
         price: 'NRP 600/hour',
@@ -13,7 +14,7 @@ const data = [
     },
     {
         id: '2',
-        name: 'Uchiha Futsal',
+        name: 'Crystal Futsal',
         image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0ly-OD8o4nW1T4tR9lnpfpaC2ioW3v3c8vJ6EP3KoNmNgA-dDleT7ohKURfYbENSz-AU&usqp=CAU',
         distance: '3.0 km away',
         price: 'NRP 500/hour',
@@ -40,7 +41,7 @@ export default function FutsalList({ navigation }) {
             <View style={styles.infoContainer}>
                 <Text style={styles.name}>{item.name}</Text>
                 <View style={styles.detailsRow}>
-                    <Ionicons name="location-outline" size={16} color="#666" />
+                    <Icon name="direction" size={14} color="black" />
                     <Text style={styles.details}>{item.distance}</Text>
                 </View>
                 <Text style={styles.details}>{item.price}</Text>
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
     },
     image: {
         width: 135,
-        height: 140,
+        height: 160,
         borderRadius: 8,
     },
     infoContainer: {

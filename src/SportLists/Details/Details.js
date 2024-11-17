@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, TextInput, Alert } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, TextInput, Alert, Linking } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -52,6 +52,15 @@ export default function Details({ route }) {
             Alert.alert("No Slot Selected", "Please select a time slot before finding an opponent.");
         }
     };
+    // Open maps 
+    const openMapsForKathmandu = () => {
+        const query = futsal.name || 'sports facilities'; // Default to a generic query if no name is available
+        const url = `https://www.google.com/maps?q=${encodeURIComponent(query)}`;
+        Linking.openURL(url).catch(() => {
+            Alert.alert("Error", "Unable to open maps.");
+        });
+    };
+
 
     // Example slot data
     const [slots, setSlots] = useState([
@@ -78,14 +87,10 @@ export default function Details({ route }) {
 
                     <View style={styles.infoContainer}>
                         <View style={styles.row}>
-                            <Ionicons name="location-outline" size={20} color="red" />
-                            <Text style={styles.infoText}>{futsal.location}Map API</Text>
-                        </View>
-                        <View style={styles.row}>
                             <Ionicons name="cash-outline" size={20} color="green" />
                             <Text style={styles.infoText}>{futsal.price}</Text>
                         </View>
-                        <TouchableOpacity onPress={() => { }}>
+                        <TouchableOpacity onPress={openMapsForKathmandu}>
                             <View style={styles.mapsLinkContainer}>
                                 <Ionicons name="map-outline" size={20} color="#f44336" />
                                 <Text style={styles.mapsLinkText}>View On Maps</Text>

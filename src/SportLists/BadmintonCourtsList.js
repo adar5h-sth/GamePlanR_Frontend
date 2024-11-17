@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Entypo';
 
 const data = [
     {
         id: '1',
-        name: 'Uchiha Court',
+        name: 'Andaman Badminton Club',
         image: 'https://www.playspots.in/wp-content/uploads/2021/04/YUscl8rGb6.jpg',
         distance: '2.0 km away',
         price: 'NRP 600/hour',
@@ -13,7 +14,7 @@ const data = [
     },
     {
         id: '2',
-        name: 'Shisui ko Court',
+        name: 'Dhanyentari Badminton Club',
         image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZCBB7g1EleekPvotZcwvTRWA0qwTrgMYxOg&s',
         distance: '3.0 km away',
         price: 'NRP 500/hour',
@@ -39,7 +40,7 @@ export default function BadmintonCourtsList({ navigation }) {
             <View style={styles.infoContainer}>
                 <Text style={styles.name}>{item.name}</Text>
                 <View style={styles.detailsRow}>
-                    <Ionicons name="location-outline" size={16} color="#666" />
+                    <Icon name="direction" size={14} color="black" />
                     <Text style={styles.details}>{item.distance}</Text>
                 </View>
                 <Text style={styles.details}>{item.price}</Text>
@@ -94,7 +95,7 @@ const styles = StyleSheet.create({
     },
     image: {
         width: 135,
-        height: 140,
+        height: 160,
         borderRadius: 8,
     },
     infoContainer: {

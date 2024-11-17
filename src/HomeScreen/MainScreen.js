@@ -46,7 +46,7 @@ export default function MainScreen() {
     };
     const handleArenaCardPress = () => {
         const futsalDetails = {
-            name: "Adarsh ko Futsal",
+            name: "Crystal Futsal",
             location: "", //Map API
             distance: "2.1 km",
             price: "NRP 600",
@@ -71,8 +71,8 @@ export default function MainScreen() {
             <Text style={styles.recommendationTitle}>Recommended Arena</Text>
 
             <ArenaCard
-                name="Adarsh ko Futsal"
-                location="Hanagulu Marg, Kuleshwor"
+                name="Crystal Futsal"
+                location="M7WQ+9J8, Kathmandu 44600"
                 distance="2.1 km"
                 price="600"
                 rating="5.0"
