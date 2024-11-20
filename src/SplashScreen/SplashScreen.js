@@ -12,15 +12,15 @@ const SplashScreen = () => {
             // Fade in the logo
             Animated.timing(fadeAnim, {
                 toValue: 1,
-                duration: 1000, // Animation duration
+                duration: 2000, // Animation duration
                 useNativeDriver: true,
             }).start();
 
             // Navigate to AccountTypeSelection.js after 2 seconds
             setTimeout(() => {
                 navigation.replace('AccountTypeSelection');
-            }, 2000);
-        }, 2000); // White screen delay
+            }, 3000);
+        }, 3000); // White screen delay
 
         return () => clearTimeout(whiteScreenTimeout); // Cleanup timeout
     }, [fadeAnim, navigation]);
@@ -50,8 +50,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     logo: {
-        width: 160,
-        height: 160,
+        width: 180,
+        height: 180,
         resizeMode: 'contain',
     },
 });
