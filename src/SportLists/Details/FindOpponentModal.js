@@ -32,11 +32,6 @@ export default function FindOpponentModal({ visible, onClose, futsalName, locati
                         </TouchableOpacity>
 
                         <Text style={styles.futsalName}>{futsalName}</Text>
-                        <View style={styles.locationContainer}>
-                            <Ionicons name="location-outline" size={20} color="red" />
-                            <Text style={styles.locationText}>{location} Map API</Text>
-                        </View>
-
                         <View style={styles.detailsContainer}>
                             <View style={styles.detailRow}>
                                 <Text style={styles.label}>Date:</Text>
@@ -87,11 +82,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center',
-    },
-    locationContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginTop: 5,
     },
     locationText: {
         fontSize: 14,
