@@ -27,5 +27,8 @@ This repository contains the codebase for the **user side** of the application, 
 
 ---
 
+## 📽️ Demo Video
+
+Watch a walkthrough of the app here: (https://drive.google.com/file/d/1jZRHwSaTLKxyzooStidSCHjqJ32-6rnr/view?usp=drive_link)
 
 
