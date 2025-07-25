@@ -1,4 +1,4 @@
-# Sports Venue App and Matchnaking App
+# Sports Venue App and Matchmaking App
 
 This project aims to **simplify the process of finding and booking nearby sports venues** while enabling users to arrange games and matches with other players. We believe this platform can significantly enhance sporting participation by making team game planning easier and more accessible.
 
